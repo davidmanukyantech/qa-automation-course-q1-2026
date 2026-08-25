@@ -73,3 +73,40 @@ console.log(mutableFruits);
 
 mutableFruits.sort();
 console.log(mutableFruits);
+
+// ---- FINDERS
+
+//indexOf() - returns **first index** of value in the array
+
+const cars = ["BMW", "MERCEDES", "TESLA", "KIA", "JEEP", "TESLA"];
+console.log(cars.indexOf("TESLA"));
+
+//lastIndexOF() -returns the last matching value from array
+console.log(cars.lastIndexOf("TESLA"));
+
+//at() - gets an element at specific position
+console.log(cars.at(1)); // mercedes
+console.log(cars.at(4)); // JEEP
+
+//includes.- checks if our array includes value. output is boolean
+
+console.log(cars.includes("JEEP"));
+
+//---- JOINERS AND CONVERTERS
+
+//join() converts array into string with a specified separator
+const carsString = cars.join(", ");
+console.log(carsString);
+
+//array.from() -creates a new array from iterable data type
+
+const str = "Hello";
+const chars = Array.from(str);
+console.log(chars);
+
+// Array.isArray() - checks if a value is an array
+const luckyNumbers = [7, 10, 19, 21];
+console.log(Array.isArray(luckyNumbers));
+
+const name = "david";
+console.log(Array.isArray(name));
