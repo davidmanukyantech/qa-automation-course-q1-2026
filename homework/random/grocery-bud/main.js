@@ -1,7 +1,7 @@
 const alert = document.querySelector(".alert");
 const form = document.querySelector(".grocery-form");
 const grocery = document.getElementById("grocery");
-const cubmitBtn = document.querySelector(".submit-btn");
+const submitBtn = document.querySelector(".submit-btn");
 const container = document.querySelector(".grocery-container");
 const list = document.querySelector(".grocery-list");
 const clearBtn = document.querySelector(".clear-btn");
@@ -15,6 +15,8 @@ let editId = "";
 // event listeners
 //submit form
 form.addEventListener("submit", addItem);
+//clear items
+clearBtn.addEventListener("click", clearItems);
 
 //FUNCTIONS
 function addItem(e) {
@@ -43,6 +45,11 @@ function addItem(e) {
                 <i class="fas fa-trash"></i>
               </button>
             </div>`;
+
+    const deleteBtn = element.querySelector(".delete-btn");
+    const editBtn = element.querySelector(".edit-btn");
+    deleteBtn.addEventListener("click", deleteBtn);
+    editBtn.addEventListener("click", editBtn);
     //append child
     list.appendChild(element);
     //display alert
@@ -52,10 +59,14 @@ function addItem(e) {
     //add to local storage
     addToLocalStorage(id, value);
     //setback to default
-    setBackToDefault;
+    setBackToDefault();
     console.log("add item to the list");
   } else if (value && editFlag) {
-    console.log("editing");
+    editElement.innerHTML = value;
+    displayAlert("item changed", "success");
+    //edit local storage
+    editLocalStorage();
+    setBackToDefault();
   } else {
     displayAlert("please enter value", "danger");
     //console.log("empty value");
@@ -73,10 +84,54 @@ function displayAlert(text, action) {
     alert.classList.remove(`alert-${action}`);
   }, 1000);
 }
+//clear items
+function clearItems() {
+  const items = document.querySelectorAll(".grocery-item");
 
+  if (items.length > 0) {
+    items.forEach(function (item) {
+      list.removeChild(item);
+    });
+  }
+  container.classList.remove("show-container");
+  displayAlert("empty list", "danger");
+  setBackToDefault();
+  //localStorage.removeItem('ist');
+}
+
+//delete function
+
+function deleteItem() {
+  const element = e.currentTarget.parentElement.parentElement;
+  const id = element.dataset.id;
+  list.removeChild(element);
+  if (list.children.length === 0) {
+    container.classList.remove("show-container");
+  }
+  displayAlert("item removed", "danger");
+  setBackToDefault();
+
+  //remove from local storage
+  //removeFromLocalStorage(id);
+}
+
+//edit item
+function editItem() {
+  const element = e.currentTarget.parentElement.parentElement;
+  //set edit item
+  editElement = e.currentTarget.parentElement.previousElementSibling;
+  //set form value
+  grocery.value = editElement.innerHTML;
+  editFlag = true;
+  editId = element.dataset.id;
+  submitBtn.textContent = "edit";
+}
 //Set back to default
 function setBackToDefault() {
-  console.log("set back to default");
+  grocery.value = "";
+  editFlag = false;
+  editId = "";
+  submitBtn.textContent = "submit";
 }
 
 //**** LOCAL STORAGE***
@@ -84,3 +139,5 @@ function setBackToDefault() {
 function addToLocalStorage(id, value) {
   console.log("added to local storage");
 }
+
+function removeFromLocalStorage(id) {}
