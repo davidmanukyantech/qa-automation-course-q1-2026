@@ -228,7 +228,7 @@ console.log(Math.min(5, 8, 23, 2, 3));
 //find largest number
 console.log(Math.max(5, 8, 23, 2, 3));
 
-//raise number to a power
+//raise number to a power.
 console.log(Math.pow(5, 3));
 
 //find square root
