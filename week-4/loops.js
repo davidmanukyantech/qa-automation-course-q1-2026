@@ -52,3 +52,18 @@ for (let i = 0; i < studentNames.length; i++) {
   }
   console.log(studentNames[i]);
 }
+
+// continue
+
+for (let i = 1; i <= 5; i++) {
+  if (i === 3) continue;
+  console.log(i);
+}
+
+// NESTED LOOPS
+
+for (let i = 1; i <= 3; i++) {
+  for (let j = 1; j <= 2; j++) {
+    console.log(`i = ${i}, j =${j}`);
+  }
+}
