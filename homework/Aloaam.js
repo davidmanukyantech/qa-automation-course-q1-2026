@@ -43,5 +43,3 @@ function combineNumbers(arr1, arr2) {
 }
 
 nums = combineNumbers(num1, num2);
-
-console.log(nums);
